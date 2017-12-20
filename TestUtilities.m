@@ -24,6 +24,7 @@ RunTest::usage="";
 RunAllTests::usage="";
 
 PrintTestSummary::usage="";
+GetFailedTestCount::usage="";
 
 GetTestBody::notest = "Test with name `1` not found";
 ClearTest::notest = GetTestBody::notest;
@@ -146,6 +147,9 @@ PrintTestSummary[TestResult[name_String, total_Integer,
                 If[failed != 0, Style["FAIL", Red], Style["OK", Green]]];
           Print["Checked ", total, " assertions in ", timing, " seconds."];
          ];
+
+GetFailedTestCount[results_List] :=
+    Count[results, TestResult[_, _, _, failed_ /; failed != 0, _]];
 
 End[];
 
